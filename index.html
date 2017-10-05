@@ -1,9 +1,109 @@
 <html>
-<head>
-    <title>Github Test Page</title>
-</head>
-    <body>
-        <h1>GITHUB</h1>
-        <h2>GITHUB</h2>
+    <head>
+        <title>
+        </title>
+        <script src="angular.js"></script>
+        <script src="app.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body ng-app="myApp">
+        <div ng-controller="myController">
+            <fieldset>
+                <legend>
+                    DOM Scope
+                </legend>
+                This text box is inside DOM scope <input type="textbox" ng-model="theirUrl"/>
+                This is also inside DOM scope <input type="textbox" ng-model="lnkTxt"/>
+            </fieldset>
+            
+            <my-directive some-attr="theirUrl" link-Text="{{lnkTxt}}"></my-directive>
+            
+            
+            <fieldset>
+                <legend>Ng-Disabled with inline expression</legend>
+                <input type="text" ng-model="someProperty" placeholder="Type to Enable"/>
+                <button ng-model="button" ng-disabled="!someProperty">A Button</button>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Ng-Disabled with controller</legend>
+                <textarea ng-disabled="isDisabled">Wait 5 seconds</textarea>
+            </fieldset>
+            
+            <fieldset>
+                <input type="text" ng-model="someProperty1"><br/>
+                <input type="text" ng-readonly="someProperty1" value="Some text here"/>
+            </fieldset>
+            <fieldset>
+                <label>SomeProperty={{someProperty3}}</label>
+                <input type="checkbox" ng-checked="someProperty3" ng-model="someProperty3" ng-init="someProperty3=true" />
+            </fieldset>
+            
+            <fieldset>
+                <label>Select Two Fish:</label>
+                <input type="checkbox" ng-model="isTwoFish"><br/>
+                <select>
+                    <option>One Fish</option>
+                    <option ng-selected="isTwoFish">Two Fish</option>
+                </select>
+            </fieldset>
+            <fieldset>
+                <a ng-href="{{myHref}}"> I am feeling lucky when I load ng-href</a>
+                <a href="{{myHref}}"> I am feeling 404!</a>
+            </fieldset>
+        </div>
+        
+        <fieldset>
+            <div ng-controller="someController">
+                {{ someBareValue }}
+                <button ng-click="someAction()">Communicate to child</button>
+                <div ng-controller="childController">
+                    {{ someBareValue }}
+                    <button ng-click="childAction()">Communicate to parent</button>
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <div ng-controller="someController1">
+                {{ someModel.someValue }}
+                <button ng-click="someAction()">Communicate to child</button>
+                <div ng-controller="childController2">
+                    {{ someModel.someValue }}
+                    <button ng-click="childAction()">Communicate to parent</button>
+                </div>
+            </div>
+        </fieldset>
+        
+            <div ng-include="index.html" onload="name='hello'"> 
+                Hello {{ name }}
+            </div>
+        <fieldset>
+        <input type="text" ng-model="person.name" />
+            <div ng-switch on="person.name" ng-controller='TestController'>
+                <p ng-switch-default>Name</p>
+                <div ng-switch-when="Anup" ng-bind="alert('hello')">
+                    
+                </div>
+                <div ng-switch-when="samim" ng-bind="alert('Hiii')">
+                    
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <ul ng-controller="PeopleController">
+                <li ng-repeat="person in people" ng-class="{even: !$even, odd: !$odd}">
+                    {{person.name}} lives in {{person.city}}
+                </li>
+            </ul>
+        </fieldset>
+        <fieldset>
+            <form name="frnTest" novalidate>
+                <input type="text" ng-model="sfs" ng-pattern="/^[a-zA-Z0-9\s,'-]*$/" numeric-only required name="tex"/>
+                
+                <p>{{frnTest.tex.$valid}}</p>
+            </form>
+        </fieldset>
+       
     </body>
 </html>
